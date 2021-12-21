@@ -68,7 +68,7 @@ if (!converter) {
 
 // Just guess
 if (!converter) {
-    var guessFile = file.replace(/\.js$/, "") + ".map";
+    var guessFile = file + ".map";
     var mapSource = fs.readFileSync(guessFile).toString();
     converter = convert.fromJSON(mapSource);
 }
