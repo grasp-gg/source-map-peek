@@ -26,17 +26,9 @@ Usage
     --padding   Add padding for the preview. Default: 10
     --map       Set custom path to the source map file if everything else fails
 
-    To start editor on the line use
-
-    --emacs
-    --gedit
-    --less
-    --nano
-    --vim
-
 Example
 
-    $ source-map-peek -p 5 bundle.js:9134
+    $ npm exec https://github.com/grasp-gg/source-map-peek -p 5 bundle.js:9134
     16:     constructor: ->
     17:         super
     18:         @randomizeIndex()
@@ -51,7 +43,7 @@ Example
     file /path/to/file.coffee
     line: 20 column: 8
 
-Install
+Run (npm 7)
 -------
 
-    npm install -g source-map-peek
+    npm exec https://github.com/grasp-gg/source-map-peek --help

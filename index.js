@@ -3,7 +3,6 @@
 var fs = require("fs");
 var SourceMapConsumer = require("source-map").SourceMapConsumer;
 var convert = require("convert-source-map");
-var kexec = require("kexec");
 var path = require("path");
 var minimist = require("minimist");
 
@@ -19,11 +18,6 @@ var argv = minimist(process.argv.slice(2), {
     },
     boolean: [
         "help",
-        "vim",
-        "emacs",
-        "nano",
-        "less",
-        "gedit",
         "path"
     ]
 });
@@ -83,23 +77,6 @@ if (!converter || !converter.sourcemap) {
 var smc = new SourceMapConsumer(converter.sourcemap);
 
 var origpos = smc.originalPositionFor({ line: line, column: column });
-
-if (argv.vim) {
-    kexec("vim", [
-        "+call cursor(" + origpos.line + ", " + origpos.column +")",
-        origpos.source
-    ]);
-}
-
-function startEditorOnLine(editor) {
-    // Used by the most editors
-    kexec(editor, [ "+" + origpos.line, origpos.source ]);
-}
-
-if (argv.emacs) startEditorOnLine("emacs");
-if (argv.gedit) startEditorOnLine("gedit");
-if (argv.less) startEditorOnLine("less");
-if (argv.nano) startEditorOnLine("nano");
 
 if (argv.path) {
     process.stdout.write(origpos.source + "\n");
