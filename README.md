@@ -22,7 +22,7 @@ Usage
 
     source-map-peek [OPTIONS] FILE<:LINE>[:COLUMN]
 
-    --path           Print only the source path.
+    --path           Print only the source path (with line and column).
     --padding        Add padding for the preview. Default: 10
     --map            Set custom path to the source map file if everything else fails
     --add-prefix     Add prefix to source map destination file
@@ -44,6 +44,7 @@ Example
 
     file /path/to/file.coffee
     line: 20 column: 8
+    path: /path/to/file.coffee:20:8
 
 Run (npm 7)
 -------

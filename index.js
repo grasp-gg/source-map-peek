@@ -84,7 +84,7 @@ var origpos = smc.originalPositionFor({ line: line, column: column });
 var originalSourcePath = (argv['add-prefix'] || '') + origpos.source.toString().replace(argv['remove-prefix'] || "", "");
 
 if (argv.path) {
-    process.stdout.write(origpos.source + "\n");
+    process.stdout.write(`${originalSourcePath}:${origpos.line}:${origpos.column}` + "\n");
     process.exit(0);
 }
 
@@ -113,3 +113,4 @@ if (originalSource) {
 
 console.log("file:", originalSourcePath);
 console.log("line:", origpos.line, "column:", origpos.column);
+console.log("path:", `${originalSourcePath}:${origpos.line}:${origpos.column}`);
