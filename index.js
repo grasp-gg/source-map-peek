@@ -19,6 +19,10 @@ var argv = minimist(process.argv.slice(2), {
     boolean: [
         "help",
         "path"
+    ],
+    string: [
+	"remove-prefix",
+	"add-prefix"
     ]
 });
 
@@ -77,6 +81,7 @@ if (!converter || !converter.sourcemap) {
 var smc = new SourceMapConsumer(converter.sourcemap);
 
 var origpos = smc.originalPositionFor({ line: line, column: column });
+var originalSourcePath = (argv['add-prefix'] || '') + origpos.source.toString().replace(argv['remove-prefix'] || "", "");
 
 if (argv.path) {
     process.stdout.write(origpos.source + "\n");
@@ -84,13 +89,13 @@ if (argv.path) {
 }
 
 try {
-    var originalSource = fs.readFileSync(origpos.source).toString();
+    var originalSource = fs.readFileSync(originalSourcePath);
 } catch (err) {
-    console.error("Failed to open original source file from", origpos.source, err.code);
+    console.error("Failed to open original source file from", originalSourcePath, err.code);
 }
 
 if (originalSource) {
-    var preview = originalSource
+    var preview = originalSource.toString()
         .split("\n")
         .map(function(line, i) {
             var linenum = i + 1;
@@ -106,5 +111,5 @@ if (originalSource) {
     console.log();
 }
 
-console.log("file:", origpos.source);
+console.log("file:", originalSourcePath);
 console.log("line:", origpos.line, "column:", origpos.column);

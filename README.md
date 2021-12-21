@@ -22,9 +22,11 @@ Usage
 
     source-map-peek [OPTIONS] FILE<:LINE>[:COLUMN]
 
-    --path      Print only the source path.
-    --padding   Add padding for the preview. Default: 10
-    --map       Set custom path to the source map file if everything else fails
+    --path           Print only the source path.
+    --padding        Add padding for the preview. Default: 10
+    --map            Set custom path to the source map file if everything else fails
+    --add-prefix     Add prefix to source map destination file
+    --remove-prefix  Remove prefix from source map source file
 
 Example
 
